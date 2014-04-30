@@ -41,7 +41,6 @@ public class TweetListener implements StatusListener {
 
 	@Override
 	public void onStatus(Status arg0) {
-		System.out.println(arg0.getText());
 		_mp.receiveTweet(arg0);
 		
 	}

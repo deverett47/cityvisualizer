@@ -11,21 +11,35 @@ import java.net.URL;
 
 import javax.swing.JPanel;
 
+import tweets.TweetStreamer;
 import twitter4j.Status;
+import twitter4j.internal.org.json.JSONException;
+import twitter4j.internal.org.json.JSONObject;
 
 public class MainPanel extends JPanel {
 
+	private TweetStreamer _ts;
+	private DrawingPanel _dp;
+	
 	public MainPanel() {
 		super();
-		
+		_dp = new DrawingPanel();
+		this.add(_dp);
+		_ts = new TweetStreamer(this);
+		_ts.streamTweets("hate");
 	}
 	
 	
 	public void receiveTweet(Status tweet) {
-		this.getSentiment(tweet.getText());
+		String polarity = this.getSentiment(tweet.getText());
+		_dp.sendUpdate(polarity);
+		_dp.sendUpdate(polarity);
+		_dp.sendUpdate(polarity);
+		_dp.sendUpdate(polarity);
+		_dp.sendUpdate(polarity);
 	}
 	
-	public void getSentiment(String s) {
+	public String getSentiment(String s) {
 		try {
 			URI uri = new URI("https", 
 					"api.sentigem.com", 
@@ -43,13 +57,16 @@ public class MainPanel extends JPanel {
 			}
 			in.close();
 			
-			System.out.println(response.toString());
-			
+			String responseString =  response.toString();
+			String polarity = responseString.split(",")[4].split(":")[1].replaceAll("^\"|\"$", "");
+			return polarity;
+
 		
 		} catch (IOException | URISyntaxException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return "neutral";
 		
 		
 	}
