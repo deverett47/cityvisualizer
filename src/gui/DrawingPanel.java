@@ -20,6 +20,7 @@ public class DrawingPanel extends javax.swing.JPanel {
 	    this.setPreferredSize(size);
 	    this.setSize(size);
 	    this.setBackground(new java.awt.Color(181, 223, 255));
+	    this.setFocusable(false);
 	    
 	    _dirt = new Rectangle(this);
 		_dirt.setLocation(0, 400);

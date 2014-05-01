@@ -1,5 +1,7 @@
 package gui;
 
+import java.awt.BorderLayout;
+import java.awt.GridLayout;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -8,6 +10,7 @@ import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.util.HashMap;
 
 import javax.swing.JPanel;
 
@@ -20,13 +23,27 @@ public class MainPanel extends JPanel {
 
 	private TweetStreamer _ts;
 	private DrawingPanel _dp;
+	private SearchField _sf;
+	private SearchButton _sb;
+	private String _currQuery;
+	private HashMap<String, DrawingPanel> _history;
 	
 	public MainPanel() {
 		super();
 		_dp = new DrawingPanel();
-		this.add(_dp);
 		_ts = new TweetStreamer(this);
-		_ts.streamTweets("hate");
+		_sf = new SearchField(this);
+		_sb = new SearchButton(this);
+		this.setLayout(new BorderLayout());
+		JPanel newP = new JPanel(new GridLayout(1,2));
+		newP.add(_sf);
+		newP.add(_sb);
+		this.add(newP, BorderLayout.NORTH);
+		this.add(_dp, BorderLayout.SOUTH);
+		_sf.grabFocus();
+		_currQuery = "";
+		_history = new HashMap<String, DrawingPanel>();
+		
 	}
 	
 	
@@ -70,5 +87,44 @@ public class MainPanel extends JPanel {
 		
 		
 	}
+
+
+	public void search() {
+		//this.clear();
+//		String oldQuery = _currQuery;
+//		DrawingPanel oldDP = _dp;
+//		_currQuery = _sf.getText();
+//		
+		_sf.grabFocus();
+//
+//		if (_history.containsKey(_currQuery)) {
+//			_dp = _history.get(_currQuery);
+//			_dp.repaint();
+//		}
+//		
+//		else {
+//			_dp = new DrawingPanel();
+//			_dp.repaint();
+//		}
+
+		
+		
+		_ts.streamTweets(_sf.getText());
+		
+//		_history.put(oldQuery, oldDP);		
+		
+	}
+	
+	
+//	public void clear() {
+//		this.remove(_dp);
+//		JPanel newP = new JPanel(new GridLayout(1,2));
+//		newP.add(_sf);
+//		newP.add(_sb);
+//		this.add(newP, BorderLayout.NORTH);
+//		_dp = new DrawingPanel();
+//		this.add(_dp, BorderLayout.SOUTH);
+//		_dp.repaint();
+//	}
 	
 }
