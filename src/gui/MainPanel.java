@@ -50,10 +50,10 @@ public class MainPanel extends JPanel {
 	public void receiveTweet(Status tweet) {
 		String polarity = this.getSentiment(tweet.getText());
 		_dp.sendUpdate(polarity);
-		_dp.sendUpdate(polarity);
-		_dp.sendUpdate(polarity);
-		_dp.sendUpdate(polarity);
-		_dp.sendUpdate(polarity);
+//		_dp.sendUpdate(polarity);
+//		_dp.sendUpdate(polarity);
+//		_dp.sendUpdate(polarity);
+//		_dp.sendUpdate(polarity);
 	}
 	
 	public String getSentiment(String s) {
@@ -79,7 +79,7 @@ public class MainPanel extends JPanel {
 			return polarity;
 
 		
-		} catch (IOException | URISyntaxException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -90,41 +90,12 @@ public class MainPanel extends JPanel {
 
 
 	public void search() {
-		//this.clear();
-//		String oldQuery = _currQuery;
-//		DrawingPanel oldDP = _dp;
-//		_currQuery = _sf.getText();
-//		
-		_sf.grabFocus();
-//
-//		if (_history.containsKey(_currQuery)) {
-//			_dp = _history.get(_currQuery);
-//			_dp.repaint();
-//		}
-//		
-//		else {
-//			_dp = new DrawingPanel();
-//			_dp.repaint();
-//		}
-
-		
-		
+		_sf.grabFocus();		
 		_ts.streamTweets(_sf.getText());
 		
-//		_history.put(oldQuery, oldDP);		
 		
 	}
 	
 	
-//	public void clear() {
-//		this.remove(_dp);
-//		JPanel newP = new JPanel(new GridLayout(1,2));
-//		newP.add(_sf);
-//		newP.add(_sb);
-//		this.add(newP, BorderLayout.NORTH);
-//		_dp = new DrawingPanel();
-//		this.add(_dp, BorderLayout.SOUTH);
-//		_dp.repaint();
-//	}
 	
 }

@@ -25,13 +25,18 @@ public class DrawingPanel extends javax.swing.JPanel {
 	    _dirt = new Rectangle(this);
 		_dirt.setLocation(0, 400);
 		_dirt.setColor(new Color(131,104,52));
-		_dirt.setSize(1200,400);
+		_dirt.setSize(800,400);
 		_dirt.setVisible(true);
 	    
 	    
 		
-		_buildings = new ArrayList<Building>(20);
-		for (int i = 0; i < 20; i++) {
+//		_buildings = new ArrayList<Building>(20);
+//		for (int i = 0; i < 20; i++) {
+//			_buildings.add(i, new Building(i*40, this));
+//		}
+		
+		_buildings = new ArrayList<Building>(1);
+		for (int i = 0; i < 1; i++) {
 			_buildings.add(i, new Building(i*40, this));
 		}
 		
@@ -60,8 +65,9 @@ public class DrawingPanel extends javax.swing.JPanel {
 
 
 	public void sendUpdate(String polarity) {
-		int randIndex = (new Random()).nextInt(20);
-		Building curr = _buildings.get(randIndex);
+//		int randIndex = (new Random()).nextInt(20);
+//		Building curr = _buildings.get(randIndex);
+		Building curr = _buildings.get(0);
 		curr.insert(polarity);
 		this.repaint();
 	}
