@@ -36,8 +36,8 @@ public class DrawingPanel extends javax.swing.JPanel {
 //		}
 		
 		_buildings = new ArrayList<Building>(1);
-		for (int i = 0; i < 1; i++) {
-			_buildings.add(i, new Building(i*40, this));
+		for (int i = 0; i < 2; i++) {
+			_buildings.add(i, new Building(i*50, this));
 		}
 		
 		
@@ -65,9 +65,9 @@ public class DrawingPanel extends javax.swing.JPanel {
 
 
 	public void sendUpdate(String polarity) {
-//		int randIndex = (new Random()).nextInt(20);
+		int randIndex = (new Random()).nextInt(2);
 //		Building curr = _buildings.get(randIndex);
-		Building curr = _buildings.get(0);
+		Building curr = _buildings.get(randIndex);
 		curr.insert(polarity);
 		this.repaint();
 	}

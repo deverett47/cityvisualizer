@@ -51,12 +51,12 @@ public class Building {
 		int height = _baseY - 15;
 
 		for (BufferedImage b: _floorsNew) {
-			g.drawImage(b, 0, height, null);
+			g.drawImage(b, _baseX, height, null);
 			height -= 15;
 		}
 		
 		if (_roof != null) {
-			g.drawImage(_roof, 0, 18, null);
+			g.drawImage(_roof, _baseX, 18, null);
 		}
 		
 	}
