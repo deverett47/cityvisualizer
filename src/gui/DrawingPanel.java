@@ -4,12 +4,21 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Random;
 
+import Buildings.Building;
+import Buildings.Building1;
+import Buildings.Building2;
+import Buildings.Building3;
+import Buildings.Building4;
+import Buildings.Building5;
+import Buildings.Building6;
+import Buildings.Building7;
+
 import gfx.Rectangle;
 
 
 public class DrawingPanel extends javax.swing.JPanel {
 
-	private Building _b;
+	private Building1 _b;
 	private Rectangle _dirt;
 	private ArrayList<Building> _buildings;
 
@@ -37,12 +46,12 @@ public class DrawingPanel extends javax.swing.JPanel {
 		
 		_buildings = new ArrayList<Building>(1);
 		for (int i = 0; i < 2; i++) {
-			_buildings.add(i, new Building(i*50, this));
+			_buildings.add(i, new Building2(i*60, this));
 		}
 		
 		
 
-	    _b = new Building(0, this);
+	    _b = new Building1(0, this);
 
       }
 

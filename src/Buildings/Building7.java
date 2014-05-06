@@ -1,6 +1,8 @@
-package gui;
+package Buildings;
 
 import gfx.Rectangle;
+import gui.DrawingPanel;
+import gui.MainPanel;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
@@ -12,7 +14,7 @@ import java.util.Stack;
 
 import javax.imageio.ImageIO;
 
-public class Building {
+public class Building7 implements Building {
 
 	private Stack<Rectangle> _floors, _dirt;
 	private int _maxFloors, _currFloors, _currDirt;
@@ -25,7 +27,7 @@ public class Building {
 	private BufferedImage _roof;
 	private int _numFloors = 0;
 	
-	public Building(int baseX, DrawingPanel _dp) {
+	public Building7(int baseX, DrawingPanel _dp) {
 		//_mp = mp;
 		_maxFloors = (new Random()).nextInt(40) + 11;
 		_baseY = 400;
@@ -48,15 +50,15 @@ public class Building {
 			r.paint(g);
 		}
 		
-		int height = _baseY - 15;
+		int height = _baseY - 13;
 
 		for (BufferedImage b: _floorsNew) {
 			g.drawImage(b, _baseX, height, null);
-			height -= 15;
+			height -= 13;
 		}
 		
 		if (_roof != null) {
-			g.drawImage(_roof, _baseX, 18, null);
+			g.drawImage(_roof, _baseX, 32, null);
 		}
 		
 	}
@@ -64,13 +66,13 @@ public class Building {
 	
 	public void insert(String s) {
 		if (s.equals("neutral")) {
-			if (_numFloors <= 17) {
+			if (_numFloors <= 26) {
 				this.addFloorNew();
 			}
 		}
 		
 		else if (s.equals("positive")) {
-			if (_numFloors <= 17) {
+			if (_numFloors <= 26) {
 				this.addFloorNew();
 				this.addFloorNew();
 			}
@@ -96,17 +98,17 @@ public class Building {
 	
 	private void addFloorNew() {
 		try {
-			if (_numFloors < 17) {
-				int rand = new Random().nextInt(5) +1;
+			if (_numFloors < 26) {
+				int rand = new Random().nextInt(4) +1;
 				System.out.println(rand);
-				BufferedImage newImage = ImageIO.read(new File("building1/floor"+rand+".png"));
+				BufferedImage newImage = ImageIO.read(new File("building7/floor"+rand+".png"));
 				_floorsNew.add(newImage);
 				_numFloors++;
 			}
 			
 			else {
 				System.out.println("roof!!!!!!!!");
-				_roof = ImageIO.read(new File("building1/roof.png"));
+				_roof = ImageIO.read(new File("building7/roof.png"));
 				_numFloors++;
 			}
 			
