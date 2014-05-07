@@ -23,9 +23,10 @@ public class Building4 implements Building {
 	private int _currY, _currDirtY;
 	private boolean _finished = false;
 	private DrawingPanel _dp;
-	private Stack<BufferedImage> _floorsNew;
-	private BufferedImage _roof;
+	private Stack<BufferedImage> _floorsNew, _dirtNew;
+	private BufferedImage _roof, _dirtRoof;
 	private int _numFloors = 0;
+	private int _numDirt = 0;
 	
 	public Building4(int baseX, DrawingPanel _dp) {
 		//_mp = mp;
@@ -38,18 +39,12 @@ public class Building4 implements Building {
 		_dirt = new Stack<Rectangle>();
 		
 		_floorsNew = new Stack<BufferedImage>();
+		_dirtNew = new Stack<BufferedImage>();
 	}
 	
 	
 	public void repaint(Graphics2D g) {
-		for (Rectangle r: _floors) {
-			r.paint(g);
-		}
-		
-		for (Rectangle r: _dirt) {
-			r.paint(g);
-		}
-		
+
 		int height = _baseY - 15;
 
 		for (BufferedImage b: _floorsNew) {
@@ -59,6 +54,16 @@ public class Building4 implements Building {
 		
 		if (_roof != null) {
 			g.drawImage(_roof, _baseX, 20, null);
+		}
+		
+		int depth = _baseY;
+		for (BufferedImage b: _dirtNew) {
+			g.drawImage(b, _baseX, depth, null);
+			depth += 15;
+		}
+		
+		if (_dirtRoof != null) {
+			g.drawImage(_dirtRoof, _baseX, 730, null);
 		}
 		
 	}
@@ -79,8 +84,8 @@ public class Building4 implements Building {
 		}
 		
 		else if (s.equals("negative")) {
-			this.addDirt();
-			this.addDirt();
+			this.addDirtNew();
+			this.addDirtNew();
 		}
 	}
 	
@@ -129,5 +134,29 @@ public class Building4 implements Building {
 		curr.setVisible(true);
 		_floors.add(curr);
 	}
+
+
+	private void addDirtNew() {
+		try {
+			if (_numDirt < 22) {
+				int rand = new Random().nextInt(5) +1;
+				System.out.println(rand);
+				BufferedImage newImage = ImageIO.read(new File("building4/dirt"+rand+".png"));
+				_dirtNew.add(newImage);
+				_numDirt++;
+			}
+			
+			else {
+				System.out.println("dirt roof!!!!!!!!");
+				_dirtRoof = ImageIO.read(new File("building4/dirtroof.png"));
+				_numDirt++;
+			}
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
 	
 }

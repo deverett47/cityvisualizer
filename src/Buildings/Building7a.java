@@ -53,7 +53,7 @@ public class Building7 implements Building {
 		}
 		
 		if (_roof != null) {
-			g.drawImage(_roof, _baseX, 32, null);
+			g.drawImage(_roof, _baseX, 149, null);
 		}
 		
 
@@ -64,27 +64,27 @@ public class Building7 implements Building {
 		}
 		
 		if (_dirtRoof != null) {
-			g.drawImage(_dirtRoof, _baseX, 738, null);
+			g.drawImage(_dirtRoof, _baseX, 621, null);
 		}
 	}
 	
 	
 	public void insert(String s) {
 		if (s.equals("neutral")) {
-			if (_numFloors <= 26) {
+			if (_numFloors <= 17) {
 				this.addFloorNew();
 			}
 		}
 		
 		else if (s.equals("positive")) {
-			if (_numFloors <= 26) {
+			if (_numFloors <= 17) {
 				this.addFloorNew();
 				this.addFloorNew();
 			}
 		}
 		
 		else if (s.equals("negative")) {
-		if (_numDirt <=26) {
+		if (_numDirt <= 17) {
 			this.addDirtNew();
 			this.addDirtNew();
 		}
@@ -105,7 +105,7 @@ public class Building7 implements Building {
 	
 	private void addFloorNew() {
 		try {
-			if (_numFloors < 26) {
+			if (_numFloors < 17) {
 				int rand = new Random().nextInt(4) +1;
 				System.out.println(rand);
 				BufferedImage newImage = ImageIO.read(new File("building7/floor"+rand+".png"));
@@ -141,7 +141,7 @@ public class Building7 implements Building {
 
 	private void addDirtNew() {
 		try {
-			if (_numDirt < 26) {
+			if (_numDirt < 17) {
 				int rand = new Random().nextInt(5) +1;
 				System.out.println(rand);
 				BufferedImage newImage = ImageIO.read(new File("building7/dirt"+rand+".png"));

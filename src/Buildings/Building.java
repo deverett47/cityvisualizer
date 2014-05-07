@@ -8,4 +8,10 @@ public interface Building {
 
 	void repaint(Graphics2D brush);
 
+	int getWidth();
+	
+	boolean getFloorsFinished();
+	
+	boolean getDirtFinished();
+
 }

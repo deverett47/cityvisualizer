@@ -14,7 +14,7 @@ import java.util.Stack;
 
 import javax.imageio.ImageIO;
 
-public class Building7 implements Building {
+public class Building2a implements Building {
 
 	private Stack<Rectangle> _floors, _dirt;
 	private int _maxFloors, _currFloors, _currDirt;
@@ -28,7 +28,7 @@ public class Building7 implements Building {
 	private int _numFloors = 0;
 	private int _numDirt = 0;
 	
-	public Building7(int baseX, DrawingPanel _dp) {
+	public Building2a(int baseX, DrawingPanel _dp) {
 		//_mp = mp;
 		_maxFloors = (new Random()).nextInt(40) + 11;
 		_baseY = 400;
@@ -44,50 +44,49 @@ public class Building7 implements Building {
 	
 	
 	public void repaint(Graphics2D g) {
-		
-		int height = _baseY - 13;
+		int height = _baseY - 12;
 
 		for (BufferedImage b: _floorsNew) {
 			g.drawImage(b, _baseX, height, null);
-			height -= 13;
+			height -= 12;
 		}
 		
 		if (_roof != null) {
-			g.drawImage(_roof, _baseX, 32, null);
+			g.drawImage(_roof, _baseX, 137, null);
 		}
 		
-
 		int depth = _baseY;
 		for (BufferedImage b: _dirtNew) {
 			g.drawImage(b, _baseX, depth, null);
-			depth += 13;
+			depth += 12;
 		}
 		
 		if (_dirtRoof != null) {
-			g.drawImage(_dirtRoof, _baseX, 738, null);
+			g.drawImage(_dirtRoof, _baseX, 604, null);
 		}
+		
 	}
 	
 	
 	public void insert(String s) {
 		if (s.equals("neutral")) {
-			if (_numFloors <= 26) {
+			if (_numFloors <= 17) {
 				this.addFloorNew();
 			}
 		}
 		
 		else if (s.equals("positive")) {
-			if (_numFloors <= 26) {
+			if (_numFloors <= 17) {
 				this.addFloorNew();
 				this.addFloorNew();
 			}
 		}
 		
 		else if (s.equals("negative")) {
-		if (_numDirt <=26) {
-			this.addDirtNew();
-			this.addDirtNew();
-		}
+			if (_numDirt <= 17) {
+				this.addDirtNew();
+				this.addDirtNew();
+			}
 		}
 	}
 	
@@ -105,17 +104,17 @@ public class Building7 implements Building {
 	
 	private void addFloorNew() {
 		try {
-			if (_numFloors < 26) {
-				int rand = new Random().nextInt(4) +1;
+			if (_numFloors < 17) {
+				int rand = new Random().nextInt(5) +1;
 				System.out.println(rand);
-				BufferedImage newImage = ImageIO.read(new File("building7/floor"+rand+".png"));
+				BufferedImage newImage = ImageIO.read(new File("building2/floor"+rand+".png"));
 				_floorsNew.add(newImage);
 				_numFloors++;
 			}
 			
 			else {
 				System.out.println("roof!!!!!!!!");
-				_roof = ImageIO.read(new File("building7/roof.png"));
+				_roof = ImageIO.read(new File("building2/roof.png"));
 				_numFloors++;
 			}
 			
@@ -136,22 +135,22 @@ public class Building7 implements Building {
 		curr.setVisible(true);
 		_floors.add(curr);
 	}
-
-
-
+	
+	
+	
 	private void addDirtNew() {
 		try {
-			if (_numDirt < 26) {
+			if (_numDirt < 17) {
 				int rand = new Random().nextInt(5) +1;
 				System.out.println(rand);
-				BufferedImage newImage = ImageIO.read(new File("building7/dirt"+rand+".png"));
+				BufferedImage newImage = ImageIO.read(new File("building2/dirt"+rand+".png"));
 				_dirtNew.add(newImage);
 				_numDirt++;
 			}
 			
 			else {
 				System.out.println("dirt roof!!!!!!!!");
-				_dirtRoof = ImageIO.read(new File("building7/dirtroof.png"));
+				_dirtRoof = ImageIO.read(new File("building2/dirtroof.png"));
 				_numDirt++;
 			}
 			

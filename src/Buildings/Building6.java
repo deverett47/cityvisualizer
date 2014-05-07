@@ -23,10 +23,11 @@ public class Building6 implements Building {
 	private int _currY, _currDirtY;
 	private boolean _finished = false;
 	private DrawingPanel _dp;
-	private Stack<BufferedImage> _floorsNew;
-	private BufferedImage _roof;
+	private Stack<BufferedImage> _floorsNew, _dirtNew;
+	private BufferedImage _roof, _dirtRoof;
 	private int _numFloors = 0;
-	
+	private int _numDirt = 0;	
+
 	public Building6(int baseX, DrawingPanel _dp) {
 		//_mp = mp;
 		_maxFloors = (new Random()).nextInt(40) + 11;
@@ -38,18 +39,11 @@ public class Building6 implements Building {
 		_dirt = new Stack<Rectangle>();
 		
 		_floorsNew = new Stack<BufferedImage>();
+		_dirtNew = new Stack<BufferedImage>();
 	}
 	
 	
 	public void repaint(Graphics2D g) {
-		for (Rectangle r: _floors) {
-			r.paint(g);
-		}
-		
-		for (Rectangle r: _dirt) {
-			r.paint(g);
-		}
-		
 		int height = _baseY - 58;
 
 		for (BufferedImage b: _floorsNew) {
@@ -61,6 +55,16 @@ public class Building6 implements Building {
 			g.drawImage(_roof, _baseX, 33, null);
 		}
 		
+		int depth = _baseY;
+		for (BufferedImage b: _dirtNew) {
+			g.drawImage(b, _baseX, depth, null);
+			depth += 58;
+		}
+		
+		if (_dirtRoof != null) {
+			g.drawImage(_dirtRoof, _baseX, 632, null);
+		}
+
 	}
 	
 	
@@ -79,8 +83,10 @@ public class Building6 implements Building {
 		}
 		
 		else if (s.equals("negative")) {
-			this.addDirt();
-			this.addDirt();
+		if (_numDirt <=4) {
+			this.addDirtNew();
+			this.addDirtNew();
+		}
 		}
 	}
 	
@@ -129,5 +135,32 @@ public class Building6 implements Building {
 		curr.setVisible(true);
 		_floors.add(curr);
 	}
+
+
+
+
+	private void addDirtNew() {
+		try {
+			if (_numDirt < 4) {
+				int rand = new Random().nextInt(3) +1;
+				System.out.println(rand);
+				BufferedImage newImage = ImageIO.read(new File("building6/dirt"+rand+".png"));
+				_dirtNew.add(newImage);
+				_numDirt++;
+			}
+			
+			else {
+				System.out.println("dirt roof!!!!!!!!");
+				_dirtRoof = ImageIO.read(new File("building6/dirtroof.png"));
+				_numDirt++;
+			}
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	
 	
 }
